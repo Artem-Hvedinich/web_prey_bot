@@ -6,7 +6,7 @@ import {onMounted} from "vue";
 onMounted(() => {
   tg.ready()
 })
-const tg = window.Telegram.WebApp
+// const tg = window.Telegram.WebApp
 </script>
 
 <template>
