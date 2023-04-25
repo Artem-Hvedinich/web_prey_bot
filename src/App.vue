@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {RouterLink, RouterView} from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import {onMounted} from "vue";
 
 onMounted(() => {
@@ -11,11 +10,15 @@ const tg = window.Telegram.WebApp
 
 <template>
   <header>
+    <p>Это телеграм бот церкви Чистое сердце</p>
+    <div>
+      <router-link to="/need">Нужда</router-link>
+      <router-link to="/thank">Благодарность</router-link>
+    </div>
   </header>
   <main>
-
+    <RouterView/>
   </main>
-  <!--  <RouterView/>-->
   <footer>
     <button @click="tg.close()">Закрыть</button>
   </footer>
@@ -23,8 +26,26 @@ const tg = window.Telegram.WebApp
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid red;
+}
+
+header div {
+  display: flex;
+  gap: 20px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: red;
 }
 
 .logo {
@@ -40,7 +61,7 @@ nav {
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: orange;
 }
 
 nav a.router-link-exact-active:hover {
@@ -50,7 +71,7 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid yellow;
 }
 
 nav a:first-of-type {
