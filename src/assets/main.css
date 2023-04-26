@@ -11,3 +11,10 @@ body {
     color: var(--tg-theme-text-color);
 }
 
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 100vw;
+}
