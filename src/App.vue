@@ -1,75 +1,71 @@
-<script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
-import {onMounted} from "vue";
-
-onMounted(() => {
-  tg.ready()
-})
-const tg = window.Telegram.WebApp
-</script>
-
 <template>
-  <header>
-    <nav>
-      <router-link to="/need">Нужда</router-link>
-      <router-link to="/thank">Благодарность</router-link>
-    </nav>
-  </header>
+  <Header/>
   <main>
-    <RouterView/>
+    <RouterView @addValue="addNewData"/>
   </main>
-  <footer>
-    <button @click="tg.close()">Закрыть</button>
-  </footer>
+  <Footer/>
 </template>
+<script setup>
+import {RouterView} from 'vue-router'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import axios from "axios";
+import {onMounted, ref} from "vue";
 
-<style scoped>
-header {
-  width: 100vw;
+const asd = ref('')
+
+async function start() {
+  const res = await fetch('/getmenu')
+  asd.value = await res.json()
+  console.log(res)
+  // return await res.json()
+}
+
+start()
+
+async function addNewData({value, type}) {
+  const dbId = '9cd332aa307247b68b207e466082d982';
+  try {
+    const res = await axios({
+      methods: 'post',
+      url: `https://api.notion.com/v1/databases/${dbId}/query`,
+      headers: {
+        Authorization: 'Bearer secret_DCi48pAprHCSoLz2H3ylgYFvrZtECDsRXorXqjec1DO',
+        "Content-Type": 'application/json',
+        "Notion-Version": '2022-06-28'
+      },
+      data: {
+        // parent: {database_id: dbId},
+        filter: {
+          property: 'Name',
+          text: {
+            is_note_empty: true,
+            // "content": value
+          }
+        }
+      },
+    });
+    console.log(res)
+  } catch
+      (e) {
+    console.error(e)
+  }
+}
+
+</script>
+<style lang="scss">
+main {
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  align-items: center;
-  border-bottom: 1px solid red;
-}
-
-header div {
-  display: flex;
-  gap: 20px;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: red;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  width: 100%;
   gap: 30px;
-  font-size: 12px;
 }
 
-nav a.router-link-active {
-  color: orange;
-  text-decoration: none;
-  border-bottom: 1px solid orange;
-  padding-bottom: 2px;
-}
-
-nav a:hover {
-  color: blue;
-  text-decoration: none;
-}
-
-nav a {
-  color: red;
-  text-decoration: none;
+textarea {
+  width: 300px;
+  height: 100px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  resize: none;
 }
 </style>
