@@ -15,13 +15,13 @@ import {onMounted, ref} from "vue";
 const asd = ref('')
 
 async function start() {
-  const res = await fetch('/getmenu')
-  asd.value = await res.json()
-  console.log(res)
+  // const res = await fetch('/getmenu')
+  // asd.value = await res.json()
+  // console.log(res)
   // return await res.json()
 }
 
-start()
+// start()
 
 async function addNewData({value, type}) {
   const dbId = '9cd332aa307247b68b207e466082d982';
