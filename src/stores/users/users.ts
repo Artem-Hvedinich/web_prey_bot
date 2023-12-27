@@ -1,21 +1,19 @@
 import {ref, type Ref} from 'vue'
 import {defineStore} from 'pinia'
-import {userAPI} from "@/api/api";
+import {type MetaType, userAPI} from "../../api/api";
+import type {UserType} from "./type";
+import {da} from "vuetify/locale";
+import {useRoute} from "vue-router";
 
-export type UserType = {
-    id?: string
-    firstName: string,
-    name: string,
-    createdAt?: Date
-}
+
 export const useUsersStore = defineStore('user', () => {
     const users: Ref<Array<UserType>> = ref([])
-    const meta: Ref<{}> = ref({})
+    const meta: Ref<MetaType> = ref({} as MetaType)
 
     const getUsers = async (page = 1) => {
-        const res: { data: { data: Array<UserType>, message: string, meta: Object } } = await userAPI.getUsers(page)
-        if (res.data.data.length) users.value = res.data.data
-        meta.value = res.data.meta
+        const {data} = await userAPI.getUsers(page)
+        if (data.data.length) users.value = data.data
+        if (data.meta) meta.value = data.meta
     }
 
     const updateUserFromId = async (id: string, user: UserType) => {
@@ -31,5 +29,5 @@ export const useUsersStore = defineStore('user', () => {
         const {data} = await userAPI.removeUser(id)
         if (data.message === "success") users.value = users.value.filter(f => f.id !== id)
     }
-    return {users, getUsers, updateUserFromId, createNewUser, removeUser}
+    return {users, meta, getUsers, updateUserFromId, createNewUser, removeUser}
 })

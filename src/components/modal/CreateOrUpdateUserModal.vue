@@ -6,7 +6,7 @@
       <v-input :value="firstName" label="Фамилия" name="firstName"
                @update-value="({value})=> firstName=value"></v-input>
     </div>
-    <div style="display: flex; gap: 8px;">
+    <div class="v-modal__buttons">
       <button class="button button--main" @click="CreateOrUpdateUser">Создать пользователя</button>
       <button class="button button--cancel" @click="modal.close()">Отмена</button>
     </div>
@@ -15,8 +15,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import VInput from "@/forms/v-input.vue";
-import {useModalStore} from "@/stores/modal";
-import {useUsersStore} from "@/stores/users";
+import {useUsersStore} from "../../stores/users/users";
+import {useModalStore} from "../../stores/modal";
+
 
 const usersStore = useUsersStore()
 const {modal} = useModalStore()

@@ -2,15 +2,7 @@
   <div
       v-if="isShow"
       role="dialog"
-      :class="[
-      'v-modal',
-      {
-        'v-modal--transform': $isMobile && position !== 'top',
-        'v-modal--right': position === 'right',
-        'v-modal--top': position === 'top',
-        'v-modal--full': position === 'full',
-      },
-    ]"
+      class="v-modal"
       @click="close"
   >
     <div :style="!$isMobile && style" :class="$isMobile ? 'v-modal__mobile' : 'v-modal__desktop'" @click.stop>
@@ -21,7 +13,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useModalStore} from "@/stores/modal";
+import {useModalStore} from "../../stores/modal";
 
 const {modal} = useModalStore();
 const {close, isShow, style, position} = modal;

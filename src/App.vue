@@ -1,4 +1,5 @@
 <template>
+  preloader
   <v-modal v-if="isShow">
     <component :is="component" :data="data" @accept="accept" @close="close"/>
   </v-modal>
@@ -6,9 +7,9 @@
 </template>
 <script setup lang="ts">
 import {RouterView} from 'vue-router'
-import {useModalStore} from "@/stores/modal";
 import VModal from "@/components/v-modal/v-modal.vue";
 import {toRefs} from "vue";
+import {useModalStore} from "./stores/modal";
 
 const {modal} = useModalStore()
 

@@ -9,98 +9,15 @@
   overflow-x: hidden;
   overflow-y: initial;
 
-  &--right {
-    height: 100vh;
-    justify-content: flex-end;
-
-    & > .v-modal__desktop > .v-modal__close {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      top: 32px;
-      right: 32px;
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        background: $success-400;
-        width: 20px;
-        height: 2px;
-        border-radius: 5px;
-      }
-
-      &::before {
-        transform: rotate(45deg);
-      }
-
-      &::after {
-        transform: rotate(-45deg);
-      }
-    }
-
-    & > .v-modal__desktop {
-      height: 100%;
-      overflow-x: hidden;
-      overflow-y: initial;
-    }
-
-    &.v-modal--transform {
-      top: 0;
-    }
-
-    & > .v-modal__mobile {
-      height: 100%;
-      overflow: auto;
-      display: block;
-    }
-  }
-
-  &--top {
-    align-items: flex-start;
-    bottom: -100vh;
-
-    & > .v-modal__mobile {
-      position: relative;
-      top: 30px;
-      width: 90%;
-      border-radius: 4px;
-      padding: 10px;
-
-      & > .v-modal__close {
-        display: none;
-      }
-    }
-  }
-
-  &--full {
-    padding: 0;
-    height: 100vh;
-    top: 0 !important;
-    background: $white;
-
-    .v-modal__mobile {
-      padding: 0;
-      border-radius: 0;
-      height: 100%;
-      width: auto;
-    }
-  }
-
   &__wrapper {
     display: grid;
     gap: 32px;
     width: 100%;
+  }
 
-    &-mobile {
-      //@include media-breakpoint-down(desktop) {
-      //  gap: 140px;
-      //}
-    }
+  &__text {
+    font-size: 14px;
+    color: $gray-dark;
   }
 
   &__buttons {
@@ -117,14 +34,6 @@
   &__title {
     font-weight: 500;
     font-size: 20px;
-
-    //@include media-breakpoint-down(desktop) {
-    //  font-size: 18px;
-    //}
-  }
-
-  &--transform {
-    top: -200px;
   }
 
   &__desktop {
@@ -152,78 +61,6 @@
 
     &:has(.newsletter-subscription-modal) {
       padding: 0;
-    }
-  }
-
-  &__mobile {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-    padding: 20px 16px 34px;
-    width: 100%;
-    background: $white;
-    border-radius: 10px 10px 0 0;
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: $success-50 $success-200;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: $success-50;
-      border-radius: 2px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: $success-200;
-      border-radius: 2px;
-    }
-
-    &--line {
-      position: absolute;
-      top: -15px;
-      background: $white;
-      border-radius: 16px;
-      width: 56px;
-      height: 5px;
-    }
-
-    &__title {
-      font-weight: 500;
-      font-size: 18px;
-    }
-
-    &-enter-active {
-      transition: all 0.3s ease-out;
-    }
-
-    &-leave-active {
-      transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
-    }
-
-    &-enter-from,
-    &-leave-to {
-      transform: translateY(200px);
-    }
-
-    &--top {
-      transform: translateY(0);
-
-      &-enter-active {
-        transition: all 0.3s ease-out;
-      }
-
-      &-leave-active {
-        transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
-      }
-
-      &-enter-from,
-      &-leave-to {
-        transform: translateY(-300px);
-      }
     }
   }
 
@@ -266,15 +103,5 @@
         background: #677b92;
       }
     }
-  }
-
-  &-enter-active,
-  &-leave-active {
-    transition: opacity 0.3s ease;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
   }
 }
