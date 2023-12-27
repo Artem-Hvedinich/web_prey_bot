@@ -43,8 +43,3 @@ export const userAPI = {
         return instance.delete(`user/${id}`)
     }
 };
-
-axios.interceptors.response.use(response => {
-
-    return response
-},)

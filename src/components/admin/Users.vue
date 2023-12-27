@@ -1,7 +1,7 @@
 <template>
-  <div class="admin__users">
+  <div v-if="users.length" class="admin__users">
     <button class="button button--main" @click="createNewUser">Create new user</button>
-    <div v-if="users.length" class="admin__users--wrapper">
+    <div class="admin__users--wrapper">
       <ul class="admin__users--title">
         <li>№</li>
         <li>ФИО</li>

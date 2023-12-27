@@ -1,5 +1,5 @@
 <template>
-  preloader
+  <loader v-if="loaderStore.isShowLoader"/>
   <v-modal v-if="isShow">
     <component :is="component" :data="data" @accept="accept" @close="close"/>
   </v-modal>
@@ -10,10 +10,23 @@ import {RouterView} from 'vue-router'
 import VModal from "@/components/v-modal/v-modal.vue";
 import {toRefs} from "vue";
 import {useModalStore} from "./stores/modal";
+import Loader from "./components/Loader.vue";
+import {useLoaderStore} from "./stores/loader";
+import {instance} from "./api/api";
 
 const {modal} = useModalStore()
-
+const loaderStore = useLoaderStore()
 const {isShow, component, data, close, accept} = toRefs(modal);
+
+instance.interceptors.response.use(response => {
+  loaderStore.hideLoader()
+  return response
+})
+instance.interceptors.request.use(conf => {
+  loaderStore.showLoader()
+  return conf
+})
+
 </script>
 <style>
 header {
